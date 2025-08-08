@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✅ Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" crossorigin="anonymous">
+
+  <!-- ✅ Font Awesome CDN (Icons will load without kit ID) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>Book Store</title>
+</head>
+<body>
+
+<!-- ✅ Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">BOOK STORE</a>
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active text-white" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="available_books">Available Books</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="my_books">My Books</a></li>
+      </ul>
+      <div>
+        <a class="nav-link text-white" href="book_register">New Book Register</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ✅ Book Table -->
+<div class="container my-5 col-md-8">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NAME</th>
+        <th scope="col">AUTHOR</th>
+        <th scope="col">PRICE</th>
+        <th scope="col">ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="b : ${book}">
+        <td th:text="${b.id}"></td>
+        <td th:text="${b.name}"></td>
+        <td th:text="${b.author}"></td>
+        <td th:text="${b.price}"></td>
+        <td>
+          <a class="btn btn-secondary btn-sm" th:href="@{/mylist/{id}(id=${b.id})}">Add To Mybook</a>
+          
+          <!-- Delete Icon -->
+          <a th:href="@{/delete/{id}(id=${b.id})}" class="text-danger ms-2" title="Delete">
+            <i class="fa-solid fa-trash"></i>
+          </a>
+          
+          <!-- Edit Icon -->
+          <a th:href="@{/edit/{id}(id=${b.id})}" class="text-primary ms-2" title="Edit">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ✅ Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>
